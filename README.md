@@ -36,9 +36,7 @@ To customize the updates cadence:
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>rust-lang/renovate-presets",
-  ],
+  "extends": ["github>rust-lang/renovate-presets"],
   "lockFileMaintenance": {
     "extends": ["schedule:monthly"]
   },
