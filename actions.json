@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "GitHub Actions updates with digest pinning.",
+  "extends": [
+    "github>rust-lang/renovate-presets:base",
+    "helpers:pinGitHubActionDigestsToSemver"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    }
+  ]
+}

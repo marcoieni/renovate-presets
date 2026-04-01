@@ -1,0 +1,8 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Default rust-lang preset: lock file maintenance and GitHub Actions updates.",
+  "extends": [
+    "github>rust-lang/renovate-presets:actions",
+    "github>rust-lang/renovate-presets:lockfile"
+  ]
+}
