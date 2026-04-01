@@ -31,7 +31,7 @@ Use the `default` preset:
 
 ## Personalization
 
-If a repository wants the `rust-lang` behavior with a custom cadence from scratch, extend the schedule-free building blocks directly:
+To customize the updates cadence:
 
 ```json
 {
