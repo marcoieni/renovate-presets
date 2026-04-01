@@ -18,7 +18,7 @@ by the Infrastructure Team.
 - `default`: *(extends `actions` and `lockfile`)*.
   This is the recommended preset for most repositories in the Rust Project.
 
-## Use In A Repository
+## Use in a Repository
 
 Use the `default` preset:
 
