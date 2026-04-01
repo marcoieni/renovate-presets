@@ -8,12 +8,12 @@ by the Infrastructure Team.
 - `base`: extends [`config:recommended`](https://docs.renovatebot.com/presets-config/#configrecommended),
   and enables vulnerability alert PRs.
 - `actions`: enables GitHub Actions updates, pinning action digests to SemVer-compatible refs.
-  All GitHub Actions updates are grouped into a single PR.
+  All GitHub Actions updates are grouped into a single PR and scheduled weekly.
   *(extends `base`)*
-- `lockfile`: enables lock file updates (e.g. `cargo update`) and disables
+- `lockfile`: enables weekly lock file updates (e.g. `cargo update`) and disables
   PRs for non-breaking updates for Rust, JavaScript, and TypeScript packages.
   This is because lock file updates already include non-breaking updates.
-  Breaking updates (e.g. `1.2.3` to `2.0.0`) are updated into a separate PRs.
+  Breaking updates (e.g. `1.2.3` to `2.0.0`) are updated into separate PRs.
   *(extends `base`)*
 - `default`: *(extends `actions` and `lockfile`)*.
   This is the recommended preset for most repositories in the Rust Project.
@@ -31,7 +31,11 @@ Use the `default` preset:
 
 ## Personalization
 
-To customize the updates cadence:
+Both the `actions` and `lockfile` presets default to Renovate's
+[`schedule:weekly`](https://docs.renovatebot.com/presets-schedule/#scheduleweekly)
+preset, which resolves to Monday before 4 AM.
+
+To override them in a repository:
 
 ```json
 {
