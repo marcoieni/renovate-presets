@@ -51,6 +51,10 @@ To customize the updates cadence:
 }
 ```
 
+> [!NOTE]
+> `schedule:monthly` means "on the first day of the month, before 4AM".
+> See the [Schedule Presets](https://docs.renovatebot.com/presets-schedule/#schedulemonthly) documentation for more details.
+
 ## References
 
 - [Shareable Config Presets](https://docs.renovatebot.com/config-presets/)
