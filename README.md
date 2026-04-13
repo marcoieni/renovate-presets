@@ -3,6 +3,9 @@
 Shared [Renovate](https://docs.renovatebot.com/) presets for repositories in the Rust Project, maintained
 by the Infrastructure Team.
 
+> [!WARNING]
+> These presets are intended for use within the Rust Project and we don't support their use outside of it.
+
 ## Presets
 
 - `base`: extends [`config:recommended`](https://docs.renovatebot.com/presets-config/#configrecommended),
