@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Validate presets
+        run: renovate-config-validator --strict --no-global *.json
+
+  zizmor:
+    name: Zizmor
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@71321a20a9ded102f6e9ce5718a2fcec2c4f70d8 # v0.5.2
+        with:
+          persona: pedantic
+          # Don't use GitHub advanced security.
+          # Instead, fail if there's a security issue.
+          advanced-security: false
+
+  conclusion:
+    name: Conclusion
+    needs:
+      - validate
+      - zizmor
+    # !cancelled() executes the job regardless of whether the previous jobs passed, failed or get skipped.
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Conclusion
+        env:
+          # Store the JSON in an environment variable to avoid template injection.
+          NEEDS_JSON: ${{ toJson(needs) }}
+        run: |
+          # Print the dependent jobs to see them in the CI log
+          printf '%s\n' "$NEEDS_JSON" | jq -C
+          # Check if all jobs that we depend on (in the needs array) were successful.
+          printf '%s\n' "$NEEDS_JSON" | jq --exit-status 'all(.result == "success" or .result == "skipped")'
