@@ -3,6 +3,9 @@
 Shared [Renovate](https://docs.renovatebot.com/) presets for repositories in the Rust Project, maintained
 by the Infrastructure Team.
 
+To know more about Renovate and how to use it in repositories of the Rust Project, see the
+[Rust Forge documentation](https://forge.rust-lang.org/infra/docs/renovate.html).
+
 > [!WARNING]
 > These presets are intended for use within the Rust Project and we don't support their use outside of it.
 
