@@ -21,6 +21,9 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install Renovate
+        run: npm install --global renovate
+
       - name: Validate presets
         run: renovate-config-validator --strict --no-global *.json
 
