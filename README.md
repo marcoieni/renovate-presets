@@ -93,6 +93,26 @@ To override them in a repository:
 > `schedule:monthly` means *"on the first day of the month, before 4AM"*.
 > See the [Schedule Presets](https://docs.renovatebot.com/presets-schedule/#schedulemonthly) documentation for more details.
 
+### Minimum release age
+
+The [minimum release age](https://docs.renovatebot.com/key-concepts/minimum-release-age/)
+option allows you to specify a minimum age for releases before Renovate considers them for updates.
+
+```json
+{
+  "minimumReleaseAge": "7 days"
+}
+```
+
+We didn't set it as default because:
+
+* You could miss security updates. If a GitHub repository isn't setup correctly
+  or a security vulnerability isn't properly reported, Renovate won't update
+  to the latest patched version.
+* It could be confusing for maintainers.
+
+We might enable this option in the future.
+
 ## References
 
 - [Shareable Config Presets](https://docs.renovatebot.com/config-presets/)
