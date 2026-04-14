@@ -28,7 +28,7 @@ Use the `default` preset:
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>rust-lang/renovate-presets"]
+  "extends": ["github>rust-lang/renovate"]
 }
 ```
 
@@ -43,7 +43,7 @@ To override them in a repository:
 ```json
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>rust-lang/renovate-presets"],
+  "extends": ["github>rust-lang/renovate"],
   "lockFileMaintenance": {
     "extends": ["schedule:monthly"]
   },
