@@ -25,6 +25,9 @@ jobs:
       - name: Install Renovate
         run: npm install --global renovate
 
+      - name: Print Validator version
+        run: renovate-config-validator --version
+
       - name: Validate presets
         run: renovate-config-validator --strict --no-global *.json
 
