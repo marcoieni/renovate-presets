@@ -9,24 +9,10 @@ To know more about Renovate and how to use it in repositories of the Rust Projec
 > [!WARNING]
 > These presets are intended for use within the Rust Project and we don't support their use outside of it.
 
-## Presets
+## Quickstart
 
-- `base`: extends [`config:recommended`](https://docs.renovatebot.com/presets-config/#configrecommended),
-  and enables vulnerability alert PRs.
-- `actions`: enables GitHub Actions updates, pinning action digests to SemVer-compatible refs.
-  All GitHub Actions updates are grouped into a single PR and scheduled weekly.
-  *(extends `base`)*
-- `lockfile`: enables weekly lock file updates (e.g. `cargo update`) and disables
-  PRs for non-breaking updates for Rust, JavaScript, and TypeScript packages.
-  This is because lock file updates already include non-breaking updates.
-  Breaking updates (e.g. `1.2.3` to `2.0.0`) are updated into separate PRs.
-  *(extends `base`)*
-- `default`: *(extends `actions` and `lockfile`)*.
-  This is the recommended preset for most repositories in the Rust Project.
-
-## Use in a Repository
-
-Use the `default` preset:
+To use the default preset, add the following to your Renovate configuration file
+(e.g. `.github/renovate.json5`):
 
 ```json
 {
@@ -35,7 +21,51 @@ Use the `default` preset:
 }
 ```
 
+If you want to learn how to customize Renovate's behavior, keep reading!
+
+## Presets
+
+- `base`: extends [`config:recommended`](https://docs.renovatebot.com/presets-config/#configrecommended),
+  and enables vulnerability alert PRs.
+- `actions`: enables GitHub Actions updates, pinning action digests to SemVer-compatible refs.
+  All GitHub Actions updates are grouped into a single PR and scheduled weekly.
+- `lockfile`: enables weekly lock file updates (e.g. `cargo update`) and disables
+  PRs for non-breaking updates for Rust, JavaScript, and TypeScript packages.
+  This is because lock file updates already include non-breaking updates.
+  Breaking updates (e.g. `1.2.3` to `2.0.0`) are updated into separate PRs.
+- `default`: This is the recommended preset for most repositories in the Rust Project.
+
+Here's a diagram of the presets and how they extend each other
+(e.g. `default` extends both `actions` and `lockfile`):
+
+```mermaid
+graph TD
+    recommended["config:recommended"] --> base["base"]
+    base --> actions["actions"]
+    base --> lockfile["lockfile"]
+    actions --> default["default"]
+    lockfile --> default
+```
+
+## Use a preset in a Repository
+
+The [quickstart](#quickstart) section above shows how to use the `default` preset in a repository.
+
+To use a different preset (e.g. `actions`), add the following to your Renovate configuration file:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>rust-lang/renovate:actions"]
+}
+```
+
 ## Personalization
+
+Presets won't work for all repositories. You can adopt them and customize them in your
+repository by overriding specific configuration options.
+
+### Schedule
 
 Both the `actions` and `lockfile` presets default to Renovate's
 [`schedule:weekly`](https://docs.renovatebot.com/presets-schedule/#scheduleweekly)
